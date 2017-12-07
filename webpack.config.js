@@ -7,6 +7,11 @@ const config = {
 		path: path.resolve(__dirname, "dist"),
 		filename: "bundle.js"
 	},
+	node: {
+		fs: 'empty',
+		tls: 'empty',
+		net: 'empty'
+	},
 	resolve: {
 		extensions: ["*", ".ts", ".tsx", ".js"]
 	},

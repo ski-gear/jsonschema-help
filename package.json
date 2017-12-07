@@ -22,6 +22,8 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "semantic-ui-react": "^0.77.0"
+    "react-promise": "^2.0.0",
+    "semantic-ui-react": "^0.77.0",
+    "ski-mask": "^1.0.3"
   }
 }
