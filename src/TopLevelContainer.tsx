@@ -17,6 +17,7 @@ interface State {
 	validationState: ValidationState,
 	validationMessage: string,
 	validationContext?: null | string
+	code: string
 };
 
 interface Props {
@@ -41,7 +42,8 @@ class TopLevelContainer extends React.Component<Props, State> {
 		super(props);
 		this.state = {
 			validationState: 'notStarted',
-			validationMessage: 'Click to Validate'
+			validationMessage: 'Click to Validate',
+			code: JSON.stringify(this.json, null, 4)
 		} as State;
 	}
 
@@ -49,46 +51,63 @@ class TopLevelContainer extends React.Component<Props, State> {
 		return (
 			<Container>
 				<div>
-					<Message
-						color={messageColor(this.state.validationState)}
-						icon='code'
-						header='Validate Iglu Payloads'
-						content={this.state.validationMessage}
-					/>
 					<Divider hidden />
 					<Grid columns={1}>
 						<Grid.Column>
-							<Editor code={JSON.stringify(this.json, null, 4)} ref='monaco'/>
+							<Editor code={this.state.code} ref='monaco' />
 						</Grid.Column>
 					</Grid>
 				</div>
 				<Divider hidden />
 				<div>
-					<Button 
+					<Button
 						loading={this.isLoading()}
 						size='big'
 						color='green'
 						onClick={this.handleClick}
 					>
-						<Icon name='checkmark'></Icon>&nbsp;Validate
+						<Icon name='legal'></Icon>&nbsp;Validate
 					</Button>
 				</div>
+				<Divider />
+				{ this.formattedMessage() }
 			</Container>
 		)
 	};
 
 	isLoading = (): boolean => this.state.validationState === 'inProgress'
 
+	isMessageHidden = (): boolean => {
+		const state = this.state.validationState;
+		return state === 'inProgress' || state === 'notStarted';
+	}
+
+	formattedMessage = (): JSX.Element => {
+		return (
+			<Message hidden={this.isMessageHidden()} color={messageColor(this.state.validationState)}>
+				<Message.Header>
+					{this.state.validationMessage}
+				</Message.Header>
+				<Message.Content>
+					{this.state.validationContext}
+				</Message.Content>
+			</Message>
+		)
+	}
+
 	handleClick = (): void => {
+		const editor = this.refs.monaco as Editor
+		const latestCode = editor.state.code;
 		const vState: ValidationState= 'inProgress';
 		this.setState({ validationState: vState, validationMessage: 'Processing' })
-		this.message().then(
+		this.runValidation(latestCode).then(
 			(msg) => {
 				const vState: ValidationState = msg.success ? 'success' : 'error';
 				this.setState(
 					{
 						validationMessage: msg.message,
-						validationState: vState
+						validationState: vState,
+						validationContext: msg.context
 					}
 				)
 			}
@@ -112,7 +131,7 @@ class TopLevelContainer extends React.Component<Props, State> {
 			"schema": "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-0",
 			"data": {
 				"targetUrl": "https://myawesomeurl.com/data",
-				"elementI": "bestElementEver"
+				"elementId": "bestElementEver"
 			}
 		}
 	}
@@ -158,9 +177,19 @@ class TopLevelContainer extends React.Component<Props, State> {
 			}
 	};
 
-	message = (): Promise<JsonMessage> => {
-		const model = this.refs.monaco as any;
-		return validate(JSON.parse(model.state.code), this.resolverConfig);
+	runValidation = (code: string): Promise<JsonMessage> => {
+		try{
+			return validate(JSON.parse(code), this.resolverConfig);
+		}
+		catch(e) {
+			return Promise.reject(
+				{
+					success: false,
+					message: `Failed to parse JSON.`,
+					context: code
+				}
+			)
+		}
 	}
 }
 

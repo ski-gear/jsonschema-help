@@ -6,7 +6,7 @@ interface State {
 };
 
 interface Props {
-  [ key: string ]: string
+  [ key: string ]: any
 };
 
 class Editor extends React.Component<Props, State> {
@@ -17,12 +17,12 @@ class Editor extends React.Component<Props, State> {
     }
   }
 
-  editorDidMount(editor: any, monaco: any): void {
+  editorDidMount = (editor: any, monaco: any): void => {
     editor.focus();
   }
 
-  onChange(newValue: any, e: any): void {
-    console.log('onChange', newValue, e);
+  onChange = (newValue: any, e: any): void => {
+    this.setState({ code: newValue });
   }
 
   render() {
@@ -35,7 +35,7 @@ class Editor extends React.Component<Props, State> {
     };
     return (
       <MonacoEditor
-        height="600"
+        height="450"
         language="json"
         theme="vs-dark"
         value={code}
