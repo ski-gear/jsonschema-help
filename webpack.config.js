@@ -1,6 +1,7 @@
-var path = require("path");
+const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var config = {
+const config = {
 	entry: ["./src/index.tsx"],
 	output: {
 		path: path.resolve(__dirname, "dist"),
@@ -9,6 +10,11 @@ var config = {
 	resolve: {
 		extensions: ["*", ".ts", ".tsx", ".js"]
 	},
+	plugins: [
+		new CopyWebpackPlugin([
+			{ from: 'assets/**/*', to: '' },
+		])
+	],
 	module: {
 		loaders: [
 			{
