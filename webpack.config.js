@@ -18,6 +18,11 @@ const config = {
 	plugins: [
 		new CopyWebpackPlugin([
 			{ from: 'assets/**/*', to: '' },
+			{ from: 'index.html', to: '' },
+			{
+				from: 'node_modules/monaco-editor/min/vs',
+				to: 'vs',
+			}
 		])
 	],
 	module: {

@@ -19,6 +19,13 @@
     "@types/node" "*"
     "@types/react" "*"
 
+"@types/react-monaco-editor@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@types/react-monaco-editor/-/react-monaco-editor-0.10.0.tgz#6af8b90ef1904b9a82180c786dc22d7d100943c5"
+  dependencies:
+    "@types/react" "*"
+    monaco-editor "^0.10.0"
+
 "@types/react@*", "@types/react@^16.0.27":
   version "16.0.27"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.27.tgz#341899469ea2e98b48b11c18afb4d8361d03b013"
@@ -1462,6 +1469,10 @@ minimist@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
+monaco-editor@^0.10.0:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.10.1.tgz#8c96c4f15b6b5258bf92cbde93cad8a7e3007e14"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -1836,6 +1847,13 @@ react-dom@^16.2.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-monaco-editor@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.12.0.tgz#d96fbb07eb743eb4ad10b69d80f9985416f1a266"
+  dependencies:
+    monaco-editor "^0.10.0"
+    prop-types "^15.5.10"
 
 react-promise@^2.0.0:
   version "2.0.0"
