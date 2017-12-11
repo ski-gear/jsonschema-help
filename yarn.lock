@@ -16,6 +16,10 @@
   version "8.0.56"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.56.tgz#c4652f88d7a677e26ccc16c1485c282ce28f1ce9"
 
+"@types/ramda@^0.25.8":
+  version "0.25.8"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.25.8.tgz#d95e7e9a47ed4a0fcb1b4bbb7f6ffac71276c619"
+
 "@types/react-dom@^16.0.3":
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.3.tgz#8accad7eabdab4cca3e1a56f5ccb57de2da0ff64"
@@ -2826,6 +2830,10 @@ sshpk@^1.7.0:
 stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
+
+store@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/store/-/store-2.0.12.tgz#8c534e2a0b831f72b75fc5f1119857c44ef5d593"
 
 stream-browserify@^2.0.1:
   version "2.0.1"

@@ -11,6 +11,8 @@ interface State {
   modalOpen: boolean
 }
 
+const resolverSchema = require('./resolverSchemaJson')['1-0-0'];
+
 class ResolverModal extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -33,7 +35,7 @@ class ResolverModal extends React.Component<Props, State> {
   render() {
     return <Container>
         <Modal
-          trigger={<Button icon="setting" onClick={this.handleOpen} />}
+          trigger={<Button icon="setting" content="Edit Iglu Resolver Configuration" onClick={this.handleOpen} />}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           dimmer='blurring'
@@ -49,7 +51,10 @@ class ResolverModal extends React.Component<Props, State> {
               <Grid.Row>
                 <Grid.Column>
                   <Button size="small" color="green" onClick={this.saveResolverConfig} floated="left">
-                    <Icon name="save" />&nbsp;Save Resolver Configuration
+                    <Icon name="save" />Save Iglu Resolver Configuration
+                  </Button>
+                  <Button size="tiny" color="red" onClick={this.handleClose} floated="right">
+                    <Icon name="cancel" />Cancel
                   </Button>
                 </Grid.Column>
               </Grid.Row>
