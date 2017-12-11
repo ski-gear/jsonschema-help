@@ -71,7 +71,7 @@ class TopLevelContainer extends React.Component<Props, State> {
 							<ResolverModal code={formattedJsonString(this.resolverConfig)} codeUpdated={this.resolverUpdated}/>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row columns={1}>
             <Grid.Column stretched>
               <Divider />
             </Grid.Column>
@@ -100,7 +100,7 @@ class TopLevelContainer extends React.Component<Props, State> {
         hidden={this.isMessageHidden()}
         color={messageColor(this.state.validationState)}
       >
-        <Message.Header>{this.state.validationMessage}</Message.Header>
+        <Message.Header className="error-message">{this.state.validationMessage}</Message.Header>
         <Message.Content>{this.state.validationContext}</Message.Content>
       </Message>
     );

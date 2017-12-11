@@ -11,13 +11,15 @@
     "@types/react": "^16.0.27",
     "@types/react-dom": "^16.0.3",
     "copy-webpack-plugin": "^4.2.3",
+    "local-web-server": "^2.3.0",
     "ts-loader": "^3.2.0",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0"
   },
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "server": "ws -p 5766 -d dist/"
   },
   "dependencies": {
     "@types/react-monaco-editor": "^0.10.0",
@@ -26,6 +28,6 @@
     "react-monaco-editor": "^0.12.0",
     "react-promise": "^2.0.0",
     "semantic-ui-react": "^0.77.0",
-    "ski-mask": "^1.0.3"
+    "ski-mask": "^1.1.1"
   }
 }
