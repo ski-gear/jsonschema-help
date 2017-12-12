@@ -11,7 +11,7 @@ interface State {
   modalOpen: boolean
 }
 
-const resolverSchema = require('./resolverSchemaJson')['1-0-0'];
+const resolverSchema = require('./resolverSchema')['1-0-0'];
 
 class ResolverModal extends React.Component<Props, State> {
   constructor(props: Props) {
