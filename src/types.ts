@@ -6,30 +6,33 @@ export interface JsonMessage {
 
 export type ValidationState = 'notStarted' | 'inProgress' | 'error' | 'success';
 
-interface Validation {
+export interface Validation {
 	state: ValidationState;
 	message: string;
 	context: string;
 }
 
-export interface AppState {
+export interface Payload {
 	payload: {
 		code: string,
 		validation: Validation
-	},
+	}
+}
+
+export interface ResolverConfig {
 	resolverConfig: {
 		code: string,
 		validation: Validation
 	}
 }
 
+export type AppState = Payload & ResolverConfig
+
 export interface ReducedAppState {
 	app: AppState
 }
 
-interface Action<T> {
+export interface Action<T> {
   type: string;
-  payload?: T;
+  params?: T;
 }
-
-export type ActionType<T> = Action<T>;

@@ -1,18 +1,34 @@
 import { connect, Dispatch } from 'react-redux'
-import { validatePayload } from '../actions'
-import { Test } from '../components/test'
-import { ReducedAppState } from '../types';
+import { validatePayload, changeCode, VALIDATE_PAYLOAD } from '../actions';
+import { Payload as PayloadComponent } from '../components/Payload'
+import { AppState } from '../types';
 
-const mapStateToProps = (state: ReducedAppState , ownProps: any) => {
+const mapStateToProps = (state: AppState , ownProps: any) => {
 	return {
-		code: state.app.payload.code
+		code: state.payload.code
 	}
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any ) => {
 	return {
-		onClick: () => {
-			dispatch(validatePayload(ownProps.code))
+		onValidate: (code: string) => {
+			try {
+				dispatch(validatePayload(JSON.parse(code)));
+			} catch(e) {
+				dispatch(
+					{
+						type: VALIDATE_PAYLOAD,
+						params: {
+							state: "fail",
+							message: 'Could not parse JSON',
+							context: code,
+						}
+					}
+				)
+			}
+		},
+		onCodeChange: (code: string) => {
+			dispatch(changeCode(code))
 		}
 	}
 }
@@ -20,4 +36,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any ) => {
 export const Payload = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Test)
+)(PayloadComponent)

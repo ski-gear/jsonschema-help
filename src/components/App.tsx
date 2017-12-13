@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Payload } from '../containers/payload'
+import { Payload } from '../containers/Payload'
 
 const App = () => (
   <div>
-    <Payload code="stuff"/>
+    <Payload />
   </div>
 )
 
