@@ -12,20 +12,7 @@ const mapStateToProps = (state: AppState , ownProps: any) => {
 const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any ) => {
 	return {
 		onValidate: (code: string) => {
-			try {
-				dispatch(validatePayload(JSON.parse(code)));
-			} catch(e) {
-				dispatch(
-					{
-						type: VALIDATE_PAYLOAD,
-						params: {
-							state: "fail",
-							message: 'Could not parse JSON',
-							context: code,
-						}
-					}
-				)
-			}
+			dispatch(validatePayload(code));
 		},
 		onCodeChange: (code: string) => {
 			dispatch(changeCode(code))

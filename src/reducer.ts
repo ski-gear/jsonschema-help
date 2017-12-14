@@ -25,7 +25,6 @@ export const InitialState: AppState = {
 const payloadReducer = (state: Payload = InitialState, action: Action<string|Validation>): Payload => {
 	switch (action.type) {
 		case VALIDATE_PAYLOAD:
-		  console.log(state);
 			return assocPath(['validation'], action.params, state)
 		case CHANGE_PAYLOAD_CODE:
 			return assocPath(['code'], action.params, state)

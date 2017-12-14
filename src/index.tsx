@@ -5,6 +5,7 @@ import ThunkMiddleWare from 'redux-thunk';
 import app, { InitialState } from './reducer';
 import { Provider } from 'react-redux'
 import App from './components/App'
+import { validatePayload } from './actions';
 
 let store = createStore(
   app,
