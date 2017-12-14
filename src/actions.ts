@@ -22,7 +22,7 @@ export const validatePayload = (code: string): AsyncValidation => {
       type: VALIDATE_PAYLOAD,
       params: {
         state: 'inProgress',
-        message: 'Validating',
+        message: 'Validating...',
         context: ''
       }
     })

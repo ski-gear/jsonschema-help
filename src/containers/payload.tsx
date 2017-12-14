@@ -1,11 +1,12 @@
 import { connect, Dispatch } from 'react-redux'
 import { validatePayload, changeCode, VALIDATE_PAYLOAD } from '../actions';
 import { Payload as PayloadComponent } from '../components/Payload'
-import { AppState } from '../types';
+import { AppState, ValidationState } from '../types';
 
 const mapStateToProps = (state: AppState , ownProps: any) => {
 	return {
-		code: state.payload.code
+		code: state.payload.code,
+		loading: isLoading(state.payload.validation.state)
 	}
 }
 
@@ -19,6 +20,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any ) => {
 		}
 	}
 }
+
+const isLoading = (vState: ValidationState): boolean => vState === 'inProgress'
 
 export const Payload = connect(
 	mapStateToProps,

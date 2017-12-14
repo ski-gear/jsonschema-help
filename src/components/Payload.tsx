@@ -6,6 +6,7 @@ import { StatusMessageBox } from '../containers/StatusMessageBox';
 
 interface Props {
   code: string,
+  loading: boolean,
   onValidate: (code: string) => () => void;
   onCodeChange: (code: string) => () => void;
 }
@@ -26,7 +27,7 @@ export const Payload = (props: Props) => {
           <Grid.Row columns="2">
             <Grid.Column>
               <Button
-                // loading={this.isLoading()}
+                loading={props.loading}
                 size="large"
                 color="green"
                 onClick={handleValidation}
