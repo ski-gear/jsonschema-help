@@ -1,6 +1,5 @@
-import { AppState } from '../types';
 import * as React from 'react';
-import MonacoEditor, { ReactMonacoEditorProps } from 'react-monaco-editor';
+import MonacoEditor from 'react-monaco-editor';
 
 interface Props {
   code: string,

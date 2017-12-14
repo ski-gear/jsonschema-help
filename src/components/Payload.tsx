@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Divider, Container, Icon, Message, Button, SemanticCOLORS, Grid, Segment, Label } from "semantic-ui-react";
 import Editor from "./Editor";
 import { JsonMessage, ValidationState } from "../types";
+import { StatusMessageBox } from '../containers/StatusMessageBox';
 
 interface Props {
   code: string,
@@ -43,7 +44,9 @@ export const Payload = (props: Props) => {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column stretched>{}</Grid.Column>
+            <Grid.Column stretched>
+            <StatusMessageBox />
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>

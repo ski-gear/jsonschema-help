@@ -22,7 +22,7 @@ export const validatePayload = (code: string): AsyncValidation => {
       type: VALIDATE_PAYLOAD,
       params: {
         state: 'inProgress',
-        message: '',
+        message: 'Validating',
         context: ''
       }
     })
@@ -35,19 +35,18 @@ export const validatePayload = (code: string): AsyncValidation => {
     );
 
     const validation = liftA2(taskEither)(curry(validate))(parsedPayload)(parsedResolverConfig)
-    return validation.run()
-      .then(
-        (e) => e.fold(
-          error => console.error(error),
-          (p) => {
-            p.then(
-              (jm) => dispatchSuccess(dispatch, jm)
-            ).catch(
-              (e) => dispatchError(dispatch, e)
-            )
+    return validation
+      .run()
+      .then(res =>
+        res.fold(
+          e => dispatchError(dispatch, e),
+          p => {
+            p
+              .then((jm: JsonMessage) => dispatchSuccess(dispatch, jm))
+              .catch(e => dispatchError(dispatch, e));
           }
         )
-      )
+      );
   }
 }
 
@@ -62,7 +61,7 @@ const parseJson = (json: string): TaskEither<JsonMessage, AnyJson> => {
   const parsed = tryCatch(() =>
     JSON.parse(json)
   ).mapLeft((_: any) => {
-    return { success: false, message: "JSON parse failed.", context: JSON.stringify(json) } as JsonMessage;
+    return { success: false, message: "Could not parse JSON.", context: JSON.stringify(json) } as JsonMessage;
   });
   return fromEither(parsed);
 };
@@ -82,7 +81,7 @@ const dispatchError = (dispatch: Dispatch<Action<Validation>>, json: JsonMessage
   dispatch({
     type: VALIDATE_PAYLOAD,
     params: {
-      state: 'fail',
+      state: 'error',
       message: json.message,
       context: json.context
     }
