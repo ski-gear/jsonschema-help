@@ -1,5 +1,5 @@
 import { Action, AppState, ReducedAppState, Payload, ResolverConfig, Validation } from './types';
-import { CHANGE_PAYLOAD_CODE, VALIDATE_PAYLOAD, VALIDATE_RESOLVER_CONFIG } from './actions';
+import { CHANGE_PAYLOAD_CODE, CHANGE_RESOLVER_CONFIG_CODE, VALIDATE_PAYLOAD, VALIDATE_RESOLVER_CONFIG } from './actions';
 import { assocPath, Reduced } from "ramda";
 import { combineReducers, Reducer } from 'redux';
 
@@ -36,7 +36,9 @@ const payloadReducer = (state: Payload = InitialState, action: Action<string|Val
 const resolverConfigReducer = (state: ResolverConfig = InitialState, action: Action<string>): ResolverConfig => {
 	switch (action.type) {
 		case VALIDATE_RESOLVER_CONFIG:
-			return state
+			return assocPath(['validation'], action.params, state)
+		case CHANGE_RESOLVER_CONFIG_CODE:
+			return assocPath(['code'], action.params, state)
 		default:
 			return state;
 	}

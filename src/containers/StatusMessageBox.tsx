@@ -1,11 +1,15 @@
 import { connect, Dispatch } from 'react-redux'
-import { validatePayload, changeCode, VALIDATE_PAYLOAD } from '../actions';
 import { StatusMessageBox as StatusMessageBoxComponent } from '../components/StatusMessageBox';
-import { AppState, ValidationState } from '../types';
+import { AppState, ValidationState, ValidatableEntity } from '../types';
 import { SemanticCOLORS } from 'semantic-ui-react';
 
-const mapStateToProps = (state: AppState , ownProps: any) => {
-	const validation = state.payload.validation
+interface Props {
+  entity: ValidatableEntity
+}
+
+const mapStateToProps = (state: AppState , ownProps: Props) => {
+  const entityRoot = ownProps.entity === 'Payload' ? state.payload : state.resolverConfig;
+	const validation = entityRoot.validation
 	return {
 		hidden: messageHidden(validation.state),
 		color: messageColor(validation.state),

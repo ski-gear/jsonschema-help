@@ -3,16 +3,18 @@ import { Divider, Container, Icon, Message, Button, SemanticCOLORS, Grid, Segmen
 import Editor from "./Editor";
 import { JsonMessage, ValidationState } from "../types";
 import { StatusMessageBox } from '../containers/StatusMessageBox';
+import { ResolverConfigModal } from '../containers/ResolverConfigModal';
 
 interface Props {
   code: string,
+  resolverConfig: string,
   loading: boolean,
-  onValidate: (code: string) => () => void;
+  onValidate: (code: string, resolverConfig: string) => () => void;
   onCodeChange: (code: string) => () => void;
 }
 
 export const Payload = (props: Props) => {
-  const handleValidation = () => props.onValidate(props.code);
+  const handleValidation = () => props.onValidate(props.code, props.resolverConfig);
 
   return(
       <Container>
@@ -37,6 +39,7 @@ export const Payload = (props: Props) => {
               </Button>
             </Grid.Column>
             <Grid.Column textAlign="right">
+              <ResolverConfigModal />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={1}>
@@ -46,7 +49,7 @@ export const Payload = (props: Props) => {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column stretched>
-            <StatusMessageBox />
+            <StatusMessageBox entity='Payload'/>
             </Grid.Column>
           </Grid.Row>
         </Grid>

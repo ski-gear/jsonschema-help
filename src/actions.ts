@@ -1,6 +1,6 @@
-import { Action, Validation, JsonMessage } from './types';
+import { Action, Validation, JsonMessage, ValidatableEntity } from './types';
 import { Dispatch } from 'react-redux';
-import { validate } from "ski-mask";
+import { validate as skiMaskValidate } from "ski-mask";
 import { defaultResolverConfig } from './defaultValues';
 import { TaskEither, of as teOf, fromEither, taskEither } from "fp-ts/lib/TaskEither";
 import { liftA2 } from "fp-ts/lib/Apply";
@@ -8,18 +8,41 @@ import { tryCatch } from 'fp-ts/lib/Either';
 import { curry } from 'fp-ts/lib/function';
 import { AnyJson } from 'ski-mask/src/types/Types';
 
-export const VALIDATE_PAYLOAD = 'VALIDATE_PAYLOAD';
-export const CHANGE_PAYLOAD_CODE = 'CHANGE_PAYLOAD_CODE';
+type validateAction = 'VALIDATE_PAYLOAD' | 'VALIDATE_RESOLVER_CONFIG';
 
-export const VALIDATE_RESOLVER_CONFIG =  'VALIDATE_RESOLVER_CONFIG'
+export const VALIDATE_PAYLOAD: validateAction = 'VALIDATE_PAYLOAD';
+export const VALIDATE_RESOLVER_CONFIG: validateAction = 'VALIDATE_RESOLVER_CONFIG';
+
+type changeCodeAction = 'CHANGE_PAYLOAD_CODE' | 'CHANGE_RESOLVER_CONFIG_CODE';
+export const CHANGE_PAYLOAD_CODE: changeCodeAction = 'CHANGE_PAYLOAD_CODE';
+export const CHANGE_RESOLVER_CONFIG_CODE: changeCodeAction = 'CHANGE_RESOLVER_CONFIG_CODE';
+
+
+export const validatePayload = (code: string, resolverConfig: string): AsyncValidation => {
+  return validate(code, resolverConfig, "VALIDATE_PAYLOAD");
+}
+export const validateResolverConfig = (code: string): AsyncValidation => {
+  const resolverConfig = JSON.stringify(defaultResolverConfig);
+  return validate(code, resolverConfig, "VALIDATE_RESOLVER_CONFIG");
+}
+
+export const changePayloadCode = (code: string): Action<string> => changeCode(code, CHANGE_PAYLOAD_CODE);
+export const changeResolverConfigCode = (code: string): Action<string> => changeCode(code, CHANGE_RESOLVER_CONFIG_CODE);
+
+const changeCode = (code: string, action: changeCodeAction): Action<string> => {
+  return { 
+    type: action,
+    params: code
+  }
+}
 
 type AsyncValidation = (dispatch: Dispatch<Action<Validation>>) => Promise<void>;
 
-export const validatePayload = (code: string): AsyncValidation => {
+const validate = (code: string, resolverConfig: string, action: validateAction): AsyncValidation => {
 
   return (dispatch: Dispatch<Action<Validation>>): Promise<void> => {
     dispatch({
-      type: VALIDATE_PAYLOAD,
+      type: action,
       params: {
         state: 'inProgress',
         message: 'Validating...',
@@ -28,32 +51,21 @@ export const validatePayload = (code: string): AsyncValidation => {
     })
 
     const parsedPayload = parseJson(code);
-    const parsedResolverConfig = teOf(defaultResolverConfig as AnyJson).mapLeft(
-      (_) => {
-        return { success: false, message: "Dummy", context: '' } as JsonMessage;
-      }
-    );
+    const parsedResolverConfig = parseJson(resolverConfig);
 
-    const validation = liftA2(taskEither)(curry(validate))(parsedPayload)(parsedResolverConfig)
+    const validation = liftA2(taskEither)(curry(skiMaskValidate))(parsedPayload)(parsedResolverConfig)
     return validation
       .run()
       .then(res =>
         res.fold(
-          e => dispatchError(dispatch, e),
+          e => dispatchError(dispatch, e, action),
           p => {
             p
-              .then((jm: JsonMessage) => dispatchSuccess(dispatch, jm))
-              .catch(e => dispatchError(dispatch, e));
+              .then((jm: JsonMessage) => dispatchSuccess(dispatch, jm, action))
+              .catch(e => dispatchError(dispatch, e, action));
           }
         )
       );
-  }
-}
-
-export const changeCode = (code: string): Action<string> => {
-  return { 
-    type: CHANGE_PAYLOAD_CODE,
-    params: code
   }
 }
 
@@ -66,9 +78,9 @@ const parseJson = (json: string): TaskEither<JsonMessage, AnyJson> => {
   return fromEither(parsed);
 };
 
-const dispatchSuccess = (dispatch: Dispatch<Action<Validation>>, json: JsonMessage): void => {
+const dispatchSuccess = (dispatch: Dispatch<Action<Validation>>, json: JsonMessage, action: validateAction): void => {
   dispatch({
-    type: VALIDATE_PAYLOAD,
+    type: action,
     params: {
       state: 'success',
       message: json.message,
@@ -77,9 +89,9 @@ const dispatchSuccess = (dispatch: Dispatch<Action<Validation>>, json: JsonMessa
   })
 }
 
-const dispatchError = (dispatch: Dispatch<Action<Validation>>, json: JsonMessage): void => {
+const dispatchError = (dispatch: Dispatch<Action<Validation>>, json: JsonMessage, action: validateAction): void => {
   dispatch({
-    type: VALIDATE_PAYLOAD,
+    type: action,
     params: {
       state: 'error',
       message: json.message,

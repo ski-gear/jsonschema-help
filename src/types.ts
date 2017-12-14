@@ -6,6 +6,8 @@ export interface JsonMessage {
 
 export type ValidationState = 'notStarted' | 'inProgress' | 'error' | 'success';
 
+export type ValidatableEntity = 'Payload' | 'ResolverConfig';
+
 export interface Validation {
 	state: ValidationState;
 	message: string;

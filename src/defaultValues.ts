@@ -17,23 +17,16 @@ export const defaultResolverConfig = {
       {
         name: "Iglu Central",
         priority: 0,
-        vendorPrefixes: ["com.snowplowanalytics.snowplow"],
+        vendorPrefixes: [
+          "com.snowplowanalytics.snowplow",
+          "com.snowplowanalytics.iglu"
+        ],
         connection: {
           http: {
             uri: "http://iglucentral.com",
           },
         },
-      },
-      {
-        name: "My Iglu Server",
-        priority: 1,
-        vendorPrefixes: ["au.com.realestate"],
-        connection: {
-          http: {
-            uri: "http://iglu.data.e2e.realestate.com.au",
-          },
-        },
-      },
+      }
     ],
   },
 };
