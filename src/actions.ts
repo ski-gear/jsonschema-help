@@ -8,6 +8,7 @@ import { tryCatch } from "fp-ts/lib/Either";
 import { curry, identity } from "fp-ts/lib/function";
 import { AnyJson } from "ski-mask/src/types/Types";
 import * as WebStorage from "store";
+import { setResolverConfig } from "./Storage";
 
 type validateAction = "VALIDATE_PAYLOAD" | "VALIDATE_RESOLVER_CONFIG";
 
@@ -19,8 +20,34 @@ export const CHANGE_PAYLOAD_CODE: changeCodeAction = "CHANGE_PAYLOAD_CODE";
 export const CHANGE_RESOLVER_CONFIG_CODE: changeCodeAction = "CHANGE_RESOLVER_CONFIG_CODE";
 export const SAVE_RESOLVER_CONFIG_CODE = "SAVE_RESOLVER_CONFIG_CODE";
 
+export const OPEN_RESOLVER_CONFIG_MODAL = 'OPEN_RESOLVER_CONFIG_MODAL';
+export const CLOSE_RESOLVER_CONFIG_MODAL = 'CLOSE_RESOLVER_CONFIG_MODAL';
+
+export const openRcModal = (): Action<Validation> => {
+  return {
+    type: OPEN_RESOLVER_CONFIG_MODAL,
+    params: {
+      message: '',
+      state: 'notStarted',
+      context: ''
+    }
+  }
+}
+
+export const closeRcModal = (): Action<Validation> => {
+  return {
+    type: CLOSE_RESOLVER_CONFIG_MODAL,
+    params: {
+      message: '',
+      state: 'notStarted',
+      context: ''
+    }
+  }
+}
+
 export const validatePayload = (code: string, resolverConfig: string): AsyncValidation => {
-  return validate(code, resolverConfig, "VALIDATE_PAYLOAD", identity);
+  const noOp: Function = () => {};
+  return validate(code, resolverConfig, "VALIDATE_PAYLOAD", noOp);
 };
 export const validateResolverConfig = (code: string, handleCloseModal: Function): AsyncValidation => {
   const resolverConfig = JSON.stringify(defaultResolverConfig);
@@ -61,7 +88,9 @@ const validate = (code: string, resolverConfig: string, action: validateAction, 
           p
             .then((jm: JsonMessage) => {
               dispatchSuccess(dispatch, jm, action);
-              saveResolverConfig(dispatch, resolverConfig, afterSuccessCallback);
+              if(action === "VALIDATE_RESOLVER_CONFIG"){
+                saveResolverConfig(dispatch, parsedResolverConfig, afterSuccessCallback);
+              }
             })
             .catch(e => dispatchError(dispatch, e, action));
         },
@@ -99,8 +128,8 @@ const dispatchError = (dispatch: Dispatch<Action<Validation>>, json: JsonMessage
   });
 };
 
-const saveResolverConfig = (dispatch: Dispatch<Action<Validation>>, resolverConfig: string, afterSuccessCallback: Function): void => {
-  WebStorage.set("resolverConfig", resolverConfig);
+const saveResolverConfig = (dispatch: Dispatch<Action<Validation>>, resolverConfig: object, afterSuccessCallback: Function): void => {
+  setResolverConfig(resolverConfig);
   dispatch({
     type: SAVE_RESOLVER_CONFIG_CODE,
     params: {
