@@ -7,7 +7,7 @@ import {
   SAVE_RESOLVER_CONFIG_CODE,
 	OPEN_RESOLVER_CONFIG_MODAL,
 	CLOSE_RESOLVER_CONFIG_MODAL,
-} from "./actions";
+} from "./Actions";
 import { assocPath, Reduced } from "ramda";
 import { combineReducers, Reducer } from "redux";
 import { getPayload, getResolverConfig } from "./Storage";

@@ -1,5 +1,5 @@
 import { connect, Dispatch } from 'react-redux'
-import { validatePayload, changePayloadCode } from '../actions';
+import { validatePayload, changePayloadCode } from '../Actions';
 import { Payload as PayloadComponent } from '../components/Payload'
 import { AppState, ValidationState, ValidatableEntity } from '../types';
 

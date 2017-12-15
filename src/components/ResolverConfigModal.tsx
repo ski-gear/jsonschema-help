@@ -9,6 +9,8 @@ interface Props {
   loading: boolean;
   onValidate: (code: string, handleClose: Function) => () => void;
   onCodeChange: (code: string) => () => void;
+  onRcModalOpen: () => () => void;
+  onRcModalClose: () => () => void;
 }
 
 interface State {
@@ -25,8 +27,16 @@ export class ResolverConfigModal extends React.Component<Props, State> {
   }
 
   handleSave = () => this.props.onValidate(this.props.code, this.handleClose.bind(this));
-  handleOpen = () => this.setState({ modalOpen: true });
-  handleClose = () => this.setState({ modalOpen: false });
+
+  handleOpen = () => {
+    this.props.onRcModalOpen();
+    this.setState({ modalOpen: true })
+  };
+
+  handleClose = () => {
+    this.props.onRcModalClose();
+    this.setState({ modalOpen: false });
+  }
 
   render() {
     return (

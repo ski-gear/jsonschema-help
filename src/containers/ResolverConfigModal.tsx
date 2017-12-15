@@ -1,5 +1,5 @@
 import { connect, Dispatch } from 'react-redux'
-import { validateResolverConfig, changeResolverConfigCode } from '../actions';
+import { validateResolverConfig, changeResolverConfigCode, openRcModal, closeRcModal } from '../Actions';
 import { ResolverConfigModal as ResolverConfigModalComponent } from '../components/ResolverConfigModal';
 import { AppState, ValidationState, ValidatableEntity } from '../types';
 
@@ -19,6 +19,12 @@ const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any ) => {
 		onCodeChange: (code: string) => {
 			dispatch(changeResolverConfigCode(code))
 		},
+		onRcModalOpen: () => {
+			dispatch(openRcModal())
+		},
+		onRcModalClose: () => {
+			dispatch(closeRcModal())
+		}
 	}
 }
 
