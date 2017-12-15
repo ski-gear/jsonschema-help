@@ -1,4 +1,4 @@
-export const defaultJson = {
+export const defaultPayload = {
   schema: "iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0",
   data: {
     schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-0",

@@ -5,7 +5,7 @@ import { validate } from "ski-mask";
 import Editor from "./Editor";
 import ResolverModal from "./ResolverModal";
 import { JsonMessage, ValidationState } from "./types";
-import { defaultJson, defaultResolverConfig } from "./defaultValues";
+import { defaultPayload, defaultResolverConfig } from "./defaultValues";
 import * as WebStorage from "store";
 import { isNil, isEmpty } from "ramda";
 
@@ -48,7 +48,7 @@ class TopLevelContainer extends React.Component<Props, State> {
     this.state = {
       validationState: "notStarted",
       validationMessage: "Click to Validate",
-      code: JSON.stringify(defaultJson, null, 4),
+      code: JSON.stringify(defaultPayload, null, 4),
       resolverConfig: resolveResolverConfig()
     } as State;
   }

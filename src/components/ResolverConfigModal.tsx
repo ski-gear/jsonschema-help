@@ -7,7 +7,7 @@ import { StatusMessageBox } from "../containers/StatusMessageBox";
 interface Props {
   code: string;
   loading: boolean;
-  onValidate: (code: string) => () => void;
+  onValidate: (code: string, handleClose: Function) => () => void;
   onCodeChange: (code: string) => () => void;
 }
 
@@ -24,7 +24,7 @@ export class ResolverConfigModal extends React.Component<Props, State> {
     this.state = state;
   }
 
-  handleSave = () => this.props.onValidate(this.props.code);
+  handleSave = () => this.props.onValidate(this.props.code, this.handleClose.bind(this));
   handleOpen = () => this.setState({ modalOpen: true });
   handleClose = () => this.setState({ modalOpen: false });
 

@@ -13,8 +13,8 @@ const mapStateToProps = (state: AppState , ownProps: any) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any ) => {
 	return {
-		onValidate: (code: string) => {
-			dispatch(validateResolverConfig(code));
+		onValidate: (code: string, handleCloseModal: Function) => {
+			dispatch(validateResolverConfig(code, handleCloseModal));
 		},
 		onCodeChange: (code: string) => {
 			dispatch(changeResolverConfigCode(code))
