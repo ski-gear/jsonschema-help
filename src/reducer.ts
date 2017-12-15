@@ -1,4 +1,4 @@
-import { Action, AppState, ReducedAppState, Payload, ResolverConfig, Validation } from "./types";
+import { Action, AppState, ReducedAppState, Payload, ResolverConfig, Validation } from "./Types";
 import {
   CHANGE_PAYLOAD_CODE,
   CHANGE_RESOLVER_CONFIG_CODE,

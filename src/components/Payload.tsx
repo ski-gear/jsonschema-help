@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Divider, Container, Icon, Message, Button, SemanticCOLORS, Grid, Segment, Label } from "semantic-ui-react";
 import Editor from "./Editor";
-import { JsonMessage, ValidationState } from "../types";
+import { JsonMessage, ValidationState } from "../Types";
 import { StatusMessageBox } from '../containers/StatusMessageBox';
 import { ResolverConfigModal } from '../containers/ResolverConfigModal';
 
@@ -20,7 +20,7 @@ export const Payload = (props: Props) => {
       <Container>
         <Divider hidden />
         <Label size="large" pointing="below">
-          Add your Iglu JSON payload below and hit 'Validate'.
+          Add your Iglu JSON payload here.
         </Label>
         <Grid columns={1}>
           <Grid.Row>

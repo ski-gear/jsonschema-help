@@ -1,6 +1,6 @@
 import { connect, Dispatch } from 'react-redux'
 import { StatusMessageBox as StatusMessageBoxComponent } from '../components/StatusMessageBox';
-import { AppState, ValidationState, ValidatableEntity } from '../types';
+import { AppState, ValidationState, ValidatableEntity } from '../Types';
 import { SemanticCOLORS } from 'semantic-ui-react';
 
 interface Props {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Divider, Container, Icon, Modal, Button, SemanticCOLORS, Grid, Segment, Label } from "semantic-ui-react";
 import Editor from "./Editor";
-import { JsonMessage, ValidationState } from "../types";
+import { JsonMessage, ValidationState } from "../Types";
 import { StatusMessageBox } from "../containers/StatusMessageBox";
 
 interface Props {

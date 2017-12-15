@@ -1,7 +1,7 @@
 import { connect, Dispatch } from 'react-redux'
 import { validateResolverConfig, changeResolverConfigCode, openRcModal, closeRcModal } from '../Actions';
 import { ResolverConfigModal as ResolverConfigModalComponent } from '../components/ResolverConfigModal';
-import { AppState, ValidationState, ValidatableEntity } from '../types';
+import { AppState, ValidationState, ValidatableEntity } from '../Types';
 
 const mapStateToProps = (state: AppState , ownProps: any) => {
 	const root = state.resolverConfig;

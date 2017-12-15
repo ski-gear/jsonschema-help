@@ -1,7 +1,7 @@
 import { connect, Dispatch } from 'react-redux'
 import { validatePayload, changePayloadCode } from '../Actions';
 import { Payload as PayloadComponent } from '../components/Payload'
-import { AppState, ValidationState, ValidatableEntity } from '../types';
+import { AppState, ValidationState, ValidatableEntity } from '../Types';
 
 const mapStateToProps = (state: AppState , ownProps: any) => {
 	return {

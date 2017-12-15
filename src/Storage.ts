@@ -1,4 +1,4 @@
-import { defaultResolverConfig, defaultPayload } from "./defaultValues";
+import { defaultResolverConfig, defaultPayload } from "./DefaultValues";
 import * as WebStorage from "store";
 
 export const getResolverConfig = (): string => {

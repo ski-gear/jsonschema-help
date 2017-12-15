@@ -1,7 +1,7 @@
-import { Action, Validation, JsonMessage, ValidatableEntity } from "./types";
+import { Action, Validation, JsonMessage, ValidatableEntity } from "./Types";
 import { Dispatch } from "react-redux";
 import { validate as skiMaskValidate } from "ski-mask";
-import { defaultResolverConfig } from "./defaultValues";
+import { defaultResolverConfig } from "./DefaultValues";
 import { TaskEither, of as teOf, fromEither, taskEither } from "fp-ts/lib/TaskEither";
 import { liftA2 } from "fp-ts/lib/Apply";
 import { tryCatch } from "fp-ts/lib/Either";
