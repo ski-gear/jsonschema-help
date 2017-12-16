@@ -89,7 +89,7 @@ const validate = (code: string, resolverConfig: string, action: validateAction, 
             .then((jm: JsonMessage) => {
               dispatchSuccess(dispatch, jm, action);
               if(action === "VALIDATE_RESOLVER_CONFIG"){
-                saveResolverConfig(dispatch, JSON.parse(resolverConfig), afterSuccessCallback);
+                saveResolverConfig(dispatch, JSON.parse(code), afterSuccessCallback);
               }
             })
             .catch(e => dispatchError(dispatch, e, action));
