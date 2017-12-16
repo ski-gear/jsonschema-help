@@ -1,20 +1,14 @@
 import * as React from 'react';
-import MonacoEditor, { ReactMonacoEditorProps } from 'react-monaco-editor';
-
-interface State {
-  code: string
-};
+import MonacoEditor from 'react-monaco-editor';
 
 interface Props {
-  [ key: string ]: any
+  code: string,
+  onChange: any
 };
 
-class Editor extends React.Component<Props, State> {
+class Editor extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      code: this.props.code,
-    }
   }
 
   editorDidMount = (editor: any, monaco: any): void => {
@@ -22,11 +16,11 @@ class Editor extends React.Component<Props, State> {
   }
 
   onChange = (newValue: any, e: any): void => {
-    this.setState({ code: newValue });
+    this.props.onChange(newValue)
   }
 
   render() {
-    const code = this.state.code;
+    const code = this.props.code;
     const options = {
       selectOnLineNumbers: true,
       minimap: {
