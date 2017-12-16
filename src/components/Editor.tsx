@@ -29,7 +29,7 @@ class Editor extends React.Component<Props> {
     };
     return (
       <MonacoEditor
-        height="450"
+        height="350"
         language="json"
         theme="vs-dark"
         value={code}

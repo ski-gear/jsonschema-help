@@ -42,11 +42,6 @@ export const Payload = (props: Props) => {
               <ResolverConfigModal />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row columns={1}>
-            <Grid.Column stretched>
-              <Divider />
-            </Grid.Column>
-          </Grid.Row>
           <Grid.Row>
             <Grid.Column stretched>
             <StatusMessageBox entity='Payload'/>
