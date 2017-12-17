@@ -17,32 +17,32 @@ export const Payload = (props: Props) => {
   const handleValidation = () => props.onValidate(props.code, props.resolverConfig);
 
   return <Container>
-      <Divider hidden />
-      <Grid columns={2}>
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Label size="large" pointing="below" color="black">
-              Add your Iglu JSON payload here.
-            </Label>
-          </Grid.Column>
-          <Grid.Column>
-            <ResolverConfigModal />
-          </Grid.Column>
-          <Editor code={props.code} onChange={props.onCodeChange} />
-        </Grid.Row>
-        <Grid.Row columns="2">
-          <Grid.Column>
-            <Button loading={props.loading} size="large" color="green" onClick={handleValidation} floated="left">
-              <Icon name="legal" />
-              Validate
-            </Button>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column stretched>
-            <StatusMessageBox entity="Payload" />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Container>;
+          <Divider hidden />
+          <Grid columns={2}>
+            <Grid.Row columns={2}>
+              <Grid.Column>
+                <Label size="small" pointing="below" color="black">
+                  Add your Iglu JSON payload here.
+                </Label>
+              </Grid.Column>
+              <Grid.Column>
+                <ResolverConfigModal />
+              </Grid.Column>
+              <Editor code={props.code} onChange={props.onCodeChange} />
+            </Grid.Row>
+            <Grid.Row columns={2}>
+              <Grid.Column>
+                <Button loading={props.loading} size="large" color="green" onClick={handleValidation} floated="left">
+                  <Icon name="snowflake outline" />
+                  Validate
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={1}>
+              <Grid.Column stretched>
+                <StatusMessageBox entity="Payload" />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>;
 }

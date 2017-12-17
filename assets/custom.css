@@ -1,3 +1,11 @@
 .error-message{
   word-wrap: break-word;
 }
+
+.top-menu{
+  border-bottom: 1px solid #cccccc
+}
+
+.bottom-footer{
+  padding-bottom: 6em;
+}

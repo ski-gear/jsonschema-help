@@ -1,59 +1,72 @@
 import * as React from 'react'
 import { Payload } from '../containers/Payload'
-import { Menu, Container, Image, Divider, Segment } from "semantic-ui-react";
+import { Menu, Container, Image, Divider, Segment, Header, Icon } from "semantic-ui-react";
 import { ResolverConfigModal } from '../containers/ResolverConfigModal';
+import { ReactElement } from 'react';
+import { TopMenu } from './TopMenu';
 
 const App = () => (
-  <Container fluid>
-    <Container fluid>
-      <Container>
-        <Menu secondary>
-          <Menu.Item>
-            <Image src="/assets/images/logo.png" centered />
-          </Menu.Item>
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <GitHubStar />
-            </Menu.Item>
-            <Menu.Item>
-              <GitHubIssue />
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu>
-      </Container>
+  <div>
+    <TopMenu />
+    <Divider hidden />
+    <Container>
+      <SiteHeader />
     </Container>
-    <Container textAlign="center" />
     <Payload />
-    <Container fluid>
-      <Menu fixed="bottom" inverted>
-        <Menu.Item>Stuff</Menu.Item>
-      </Menu>
-    </Container>
-  </Container>
+    <Menu inverted className="bottom-footer">
+      <Menu.Menu position="left">
+        <Menu.Item>
+          <TrademarksNotice />
+        </Menu.Item>
+      </Menu.Menu>
+      <Menu.Menu position="right">
+        <Menu.Item>
+          <GitHubFork />
+        </Menu.Item>
+        <Menu.Item>
+          © {new Date().getFullYear()}&nbsp;<a href="https://github.com/ski-gear" target="_blank">
+            Prem Pillai
+          </a>
+        </Menu.Item>
+      </Menu.Menu>
+    </Menu>
+  </div>
 );
 
-const GitHubStar = (): React.ReactElement<string> => {
-	return <a
-		className="github-button"
-		href="https://github.com/ski-gear/jsonschema-help"
-		data-icon="octicon-star"
-		data-size="large"
-		data-show-count="true"
-		aria-label="Star ski-gear/jsonschema-help on GitHub">
-      Star me on GitHub
+
+const GitHubFork = (): ReactElement<any> => {
+  return <a
+    className="github-button"
+    href="https://github.com/ski-gears/jsonschema-help/fork"
+    data-size="large"
+    data-show-count="true"
+    aria-label="Fork ski-gears/jsonschema-help on GitHub">
+    Fork
     </a>
 }
 
-const GitHubIssue = (): React.ReactElement<string> => {
-	return <a
-		className="github-button"
-		href="https://github.com/ski-gear/jsonschema-help/issues"
-		data-icon="octicon-issue-opened"
-		data-size="large"
-		data-show-count="true"
-		aria-label="Issue ski-gear/jsonschema-help on GitHub">
-		Report an Issue
-		</a>
+const SiteHeader = (): ReactElement<any> => {
+  return (
+    <Segment stacked>
+      <Header as="h1" size="small">
+        A simple{" "}
+        <a href="https://github.com/snowplow/" target="_blank">
+          Snowplow
+        </a>{" "}
+        <a href="https://github.com/snowplow/iglu-central" target="_blank">
+          Iglu
+        </a>{" "}
+        JSON Schema validator.
+      </Header>
+    </Segment>
+  );
+};
+
+const TrademarksNotice = (): ReactElement<any> => {
+  return <p>
+    Snowplow and Iglu are trademarks of Snowplow Analytics and this website has no affiliations with them.
+  </p>
+
 }
 
 export default App
