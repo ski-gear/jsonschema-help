@@ -41,7 +41,7 @@ export class ResolverConfigModal extends React.Component<Props, State> {
   render() {
     return (
       <Modal
-        trigger={<Button icon="setting" content="Edit Iglu Resolver Configuration" onClick={this.handleOpen} />}
+        trigger={<Button icon="setting" compact size="small" floated="right" onClick={this.handleOpen} />}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         dimmer="blurring"
@@ -49,8 +49,8 @@ export class ResolverConfigModal extends React.Component<Props, State> {
         <Modal.Content>
           <Grid columns={1}>
             <Grid.Row>
-              <Label size="large" pointing="below">
-                Set up your Resolver Configuration below.
+              <Label size="large" pointing="below" color="black">
+                Set up your Resolver Configuration.
               </Label>
               <Editor code={this.props.code} onChange={this.props.onCodeChange}/>
             </Grid.Row>
@@ -62,11 +62,6 @@ export class ResolverConfigModal extends React.Component<Props, State> {
                 <Button size="tiny" color="red" onClick={this.handleClose} floated="right">
                   <Icon name="cancel" />Cancel
                 </Button>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row columns={1}>
-              <Grid.Column stretched>
-                <Divider />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
