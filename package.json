@@ -25,7 +25,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "server": "ws -p 5766 -d dist/"
+    "server": "ws -p 5766 -d ../jsonschema-help-distribution/"
   },
   "dependencies": {
     "fp-ts": "^0.6.5",

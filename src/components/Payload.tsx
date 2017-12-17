@@ -16,43 +16,33 @@ interface Props {
 export const Payload = (props: Props) => {
   const handleValidation = () => props.onValidate(props.code, props.resolverConfig);
 
-  return(
-      <Container>
-        <Divider hidden />
-        <Label size="large" pointing="below">
-          Add your Iglu JSON payload here.
-        </Label>
-        <Grid columns={1}>
-          <Grid.Row>
-            <Editor code={props.code} onChange={props.onCodeChange}/>
-          </Grid.Row>
-          <Grid.Row columns="2">
-            <Grid.Column>
-              <Button
-                loading={props.loading}
-                size="large"
-                color="green"
-                onClick={handleValidation}
-                floated="left"
-              >
-                <Icon name="legal" />&nbsp;Validate
-              </Button>
-            </Grid.Column>
-            <Grid.Column textAlign="right">
-              <ResolverConfigModal />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={1}>
-            <Grid.Column stretched>
-              <Divider />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column stretched>
-            <StatusMessageBox entity='Payload'/>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
-  )
+  return <Container>
+          <Divider hidden />
+          <Grid columns={2}>
+            <Grid.Row columns={2}>
+              <Grid.Column>
+                <Label size="small" pointing="below" color="black">
+                  Add your Iglu JSON payload here.
+                </Label>
+              </Grid.Column>
+              <Grid.Column>
+                <ResolverConfigModal />
+              </Grid.Column>
+              <Editor code={props.code} onChange={props.onCodeChange} />
+            </Grid.Row>
+            <Grid.Row columns={2}>
+              <Grid.Column>
+                <Button loading={props.loading} size="large" color="green" onClick={handleValidation} floated="left">
+                  <Icon name="snowflake outline" />
+                  Validate
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={1}>
+              <Grid.Column stretched>
+                <StatusMessageBox entity="Payload" />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>;
 }
