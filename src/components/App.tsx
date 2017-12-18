@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Payload } from '../containers/Payload'
-import { Menu, Container, Image, Divider, Segment, Header, Icon } from "semantic-ui-react";
+import { Menu, Container, Image, Divider, Segment, Header, Icon, Message } from "semantic-ui-react";
 import { ResolverConfigModal } from '../containers/ResolverConfigModal';
 import { ReactElement } from 'react';
 import { TopMenu } from './TopMenu';
@@ -13,12 +13,10 @@ const App = () => (
       <SiteHeader />
     </Container>
     <Payload />
-    <Menu inverted className="bottom-footer">
-      <Menu.Menu position="left">
-        <Menu.Item>
-          <TrademarksNotice />
-        </Menu.Item>
-      </Menu.Menu>
+    <Divider />
+    <TrademarksNotice />
+    <Divider hidden/>
+    <Menu inverted className="bottom-menu">
       <Menu.Menu position="right">
         <Menu.Item>
           <GitHubFork />
@@ -63,10 +61,12 @@ const SiteHeader = (): ReactElement<any> => {
 };
 
 const TrademarksNotice = (): ReactElement<any> => {
-  return <p>
-    Snowplow and Iglu are trademarks of Snowplow Analytics and this website has no affiliations with them.
-  </p>
-
-}
+  return <Container>
+      <Message visible size="mini">
+        <Icon circular name="trademark" />
+        Snowplow and Iglu are trademarks of Snowplow Analytics and this website has no affiliations with those brands.
+      </Message>
+    </Container>;
+};
 
 export default App

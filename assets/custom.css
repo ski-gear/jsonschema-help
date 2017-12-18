@@ -7,5 +7,9 @@
 }
 
 .bottom-footer{
-  padding-bottom: 6em;
+  padding-bottom: 1em;
+  position: relative;
+  bottom: 0em;
+  right: 0em;
+  width: 100%;
 }
