@@ -7,9 +7,14 @@
 }
 
 .bottom-footer{
+  /* margin-top: 20em !important; */
   padding-bottom: 1em;
-  position: relative;
+  position: fixed;
   bottom: 0em;
   right: 0em;
   width: 100%;
+}
+
+.trademark-notice{
+  margin-bottom: 10em
 }

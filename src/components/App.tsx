@@ -16,7 +16,7 @@ const App = () => (
     <Divider />
     <TrademarksNotice />
     <Divider hidden/>
-    <Menu inverted className="bottom-menu">
+    <Menu inverted className="bottom-footer">
       <Menu.Menu position="right">
         <Menu.Item>
           <GitHubFork />
@@ -61,7 +61,7 @@ const SiteHeader = (): ReactElement<any> => {
 };
 
 const TrademarksNotice = (): ReactElement<any> => {
-  return <Container>
+  return <Container className="trademark-notice">
       <Message visible size="mini">
         <Icon circular name="trademark" />
         Snowplow and Iglu are trademarks of Snowplow Analytics and this website has no affiliations with those brands.
